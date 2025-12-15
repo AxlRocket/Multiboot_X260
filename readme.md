@@ -28,7 +28,8 @@ Paramètres BIOS :
 ## Étapes d'installation
 
 Prérequis :
-- USB de 16 Go
+- Un deuxieme PC (idéalement sous Windows)
+- 2 USB de 16 Go
 - Cloner ce repo
 - [Python](https://www.python.org/)
 - [Rufus](https://rufus.ie/)
@@ -72,8 +73,9 @@ Une fois l'installateur lancé, il faudra supprimer et partitionner notre disque
 Laissez le système s'installer tranquillement, il devrait redémarrer plusieurs fois
 (Pour ne pas à avoir à tout le temps appuyer sur F12 au démarrage, définissez un ordre de BOOT dans le BIOS)
 
-[!IMPORTANT]
+> [!IMPORTANT]
 > Vous ne pouvez pas démarrer MacOS sans votre USB
+> Conservez cette USB pour la dernière étape
 
 ### Installation de Windows 11
 
@@ -96,7 +98,7 @@ Une fois dans l'installateur de Windows choisissez le mode d'installation avanc�
 
 Laissez Windows s'installer
 
-[!WARNING]
+> [!WARNING]
 > Attention à partir de maintenant vous démarrerez automatiquement sur Windows
 
 **5. Tips**
@@ -186,6 +188,10 @@ Pour modifier le système sélectionné par défaut dans refind, il va falloir t
 **1. Démarrer sur MacOS**
 
 Ce sera plus simple de modifier le fichier sur MacOS
+
+- Reprenez l'USB dédiée à l'installation de MacOS et insérez la dans votre PC (enlevez l'autre)
+- Appuyez sur la touche F12 au démarrage de votre machine
+- Un menu de sélection apparaitra, choisissez votre USB
 
 **2. Modification du fichier refind.conf**
 
