@@ -134,34 +134,34 @@ Laissez Debian s'installer
 
 ### Modification de l'EFI et désinstallation de GRUB
 
-Bootez sur Windows (vous pouvez le faire depuis Debian mais je suis plus à l'aise sur PowerShell)
+Bootez sur MacOS 
 
 **1. Monter la partition EFI**
 
-- Lancez un Terminal en mode Administrateur
-- Saisissez la commande DISKPART
-- Entrez les commandes suivantes :
-    - select disk 0
-    - list vol
-    - repérez le volume de 200 Mo
-    - select vol X (ou X est le numéro du volume EFI)
-    - assign letter=S
+- Ouvrez un Terminal
+- Tapez la commande `diskutil list`
+- Repérez l'indentifieur de votre disque
+    > Pour rappel la partition fait environ 200Mo
+- Puis entrez la commande `sudo diskutil mount diskXsY`
+    > Où X et Y sont des chiffres (dans mon cas disk0s1)
+- La partition EFI apparaitra dans le finder
 
-La partition EFI a du apparaitre dans l'explorateur Windows (elle est protégée, vous n'y aurez pas accès depuis l'explorateur)
 
 **2. Modification du contenu de l'EFI**
 
-Dans le dossier REFIND vous trouverez plusieurs sous dossier (BOOT, OC et DEBIAN), nous allons les copier dans notre partition EFI :  
-`cd S:\EFI\`  
-`xcopy /e C:\Users\\**VotreNomUtilisateur**\Downloads\Multiboot\REFIND\ .\`
+- Allez dans le dossier EFI de la partition EFI précédemment montée
+- Supprimez le dossier Debian déjà existant
+- Copiez le contenu du dossier REFIND dans le dossier EFI
 
-Maintenant si vous tapez la commande `ls`vous devez avoir quelques chose comme :
+Vous devez avoir dans le dossier EFI :
+
+- APPLE (pas forcément)
 - Boot
 - Debian
 - Microsoft
 - OC
   
-**3. Rebooter sur Debian**
+**3. Desinstallation de GRUB**
 
 A ce stade si vous redémarrez votre PC vous allez arriver sur la sélection du système à démarrer (MacOS par défaut), bootez sur Debian
 
@@ -183,17 +183,25 @@ Vérifiez quand même que les systèmes démarrent correctement
 
 Pour modifier le système sélectionné par défaut dans refind, il va falloir toucher un fichier de configuration (ça veut dire que s'il y a une erreur c'est pas cool) alors vérifiez et revérifiez tout ce que vous faites
 
-**1. Démarrer sur Debian**
+**1. Démarrer sur MacOS**
 
-Ce sera plus simple de modifier le fichier sur Debian
+Ce sera plus simple de modifier le fichier sur MacOS
 
 **2. Modification du fichier refind.conf**
 
 - Ouvrez un Terminal
-- Tapez la commande `su` et entrez la mot de passe root
-- Tapez la commande `nano /boot/efi/efi/boot/refind.conf`
+- Tapez la commande `diskutil list`
+- Repérez l'indentifieur de votre disque
+    > Pour rappel la partition fait environ 200Mo
+- Puis entrez la commande `sudo diskutil mount diskXsY`
+    > Où X et Y sont des chiffres (dans mon cas disk0s1)
+- La partition EFI apparaitra dans le finder
+
+Ouvrez le fichier "refind.conf" (il se trouve dans \EFI\Boot\\)
+
 - Cherchez la ligne 'default_selection  Hackintosh' et remplacez 'Hackintosh' par :
     - Debian
     - Hackintosh
     - Windows
 - Sauvegardez le fichier
+- Redémarrez pour vérifier que les changements sont bons
